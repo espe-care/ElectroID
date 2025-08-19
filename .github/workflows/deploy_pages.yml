@@ -39,7 +39,6 @@ jobs:
       - name: Build web
         run: |
           flutter build web --release \
-            --renderer html \
             --base-href /ElectroID/
 
       - name: Upload artifact to Pages
