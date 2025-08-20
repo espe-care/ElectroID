@@ -1,24 +1,45 @@
 name: electroid
-description: ElectroID – lector de QR en Flutter Web (PWA)
+description: "ElectroNFC"
 publish_to: "none"
 version: 1.0.0+1
 
 environment:
-  sdk: ">=3.9.0 <4.0.0"
+  sdk: ^3.9.0
 
 dependencies:
   flutter:
     sdk: flutter
-  http: ^1.2.2
-  mobile_scanner: ^5.2.3
   flutter_svg: ^2.0.10+1
+  mobile_scanner: ^7.0.1
+  http: ^1.2.2
+  shared_preferences: ^2.2.3
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^5.0.0
+  flutter_launcher_icons: ^0.14.0
 
 flutter:
   uses-material-design: true
   assets:
     - assets/images/drager_logo.svg
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+
+  # icono “rápido”: usa tu PNG directamente para todas las plataformas
+  image_path: assets/images/ic_icon_app-playstore.png
+
+  # --- Recomendado para Android (Adaptive Icon) ---
+  # Si más adelante separas capas, descomenta estas 3 líneas y
+  # quita image_path para Android. La capa de fondo debe ser opaca.
+  # adaptive_icon_background: "#8BB8E8"   # Pantone_278 aproximado
+  # adaptive_icon_foreground: assets/images/ic_icon_app-playstore.png
+  # adaptive_icon_monochrome: assets/images/ic_icon_app-playstore.png  # (opcional Android 13+)
+
+  # iOS
+  remove_alpha_ios: true
+
+   
