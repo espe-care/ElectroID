@@ -1,5 +1,5 @@
-name: electroid
-description: "ElectroNFC"
+name: nfcprobe
+description: App mínima de lectura NFC con flutter_nfc_kit
 publish_to: "none"
 version: 1.0.0+1
 
@@ -13,6 +13,8 @@ dependencies:
   mobile_scanner: ^7.0.1
   http: ^1.2.2
   shared_preferences: ^2.2.3
+  flutter_nfc_kit: ^3.5.2
+  ndef: ^0.3.4
 
 dev_dependencies:
   flutter_test:
@@ -27,10 +29,12 @@ flutter:
 
 flutter_launcher_icons:
   android: true
-  ios: true
-
-  # icono “rápido”: usa tu PNG directamente para todas las plataformas
-  image_path: assets/images/ic_icon_app-playstore.png
+  ios: true        # lo puedes dejar aunque no tengas Mac; solo genera los assets
+  web:
+    generate: true # actualiza favicon y manifest para tu build web
+    image_path: "assets/images/ic_icon_app-playstore.png"
+  image_path: "assets/images/ic_icon_app-playstore.png"
+  min_sdk_android: 21
 
   # --- Recomendado para Android (Adaptive Icon) ---
   # Si más adelante separas capas, descomenta estas 3 líneas y
@@ -41,5 +45,3 @@ flutter_launcher_icons:
 
   # iOS
   remove_alpha_ios: true
-
-   
