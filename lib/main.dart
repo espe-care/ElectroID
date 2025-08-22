@@ -4,8 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:http/http.dart' as http;
-import 'package:flutter_nfc_kit/flutter_nfc_kit.dart';
-import 'package:flutter/foundation.dart' show kIsWeb;
+//import 'package:flutter_nfc_kit/flutter_nfc_kit.dart';
+//import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:flutter/foundation.dart' show kIsWeb; // opcional para desactivar el botón en web
+import 'nfc_kit_mobile.dart'
+  if (dart.library.html) 'nfc_kit_web.dart';
+
 
 // ===== Modelo JSON =====
 class Activo {
