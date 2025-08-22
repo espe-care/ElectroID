@@ -15,6 +15,9 @@ class Activo {
   final String? fechaPlanificada;
   final String? departamento;
 
+  // NUEVO: Fecha Último Preventivo
+  final String? fechaUltimoPreventivo;
+
   Activo({
     required this.id,
     required this.codOrg,
@@ -24,9 +27,17 @@ class Activo {
     this.fechaAlta,
     this.fechaPlanificada,
     this.departamento,
+    this.fechaUltimoPreventivo,
   });
 
   factory Activo.fromJson(Map<String, dynamic> json) {
+    String? _pickAny(Map<String, dynamic> j, List<String> keys) {
+      for (final k in keys) {
+        if (j.containsKey(k) && j[k] != null) return j[k].toString();
+      }
+      return null;
+    }
+
     return Activo(
       id: (json['ID'] ?? '').toString(),
       codOrg: (json['COD_ORG'] ?? '').toString(),
@@ -36,6 +47,13 @@ class Activo {
       fechaAlta: json['FECHA_ALTA']?.toString(),
       fechaPlanificada: json['FECHA_PLANIFICADA']?.toString(),
       departamento: json['DEPARTAMENTO']?.toString(),
+      // Acepta variantes y el typo "RPEVENTIVO"
+      fechaUltimoPreventivo: _pickAny(json, [
+        'FECHA_ULTIMO_PREVENTIVO',
+        'FECHA ULTIMO PREVENTIVO',
+        'FECHA ULTIMO RPEVENTIVO', // typo del ejemplo
+        'FECHA_ULTIMO_RPEVENTIVO',
+      ]),
     );
   }
 }
@@ -95,6 +113,7 @@ class _MainScreenState extends State<MainScreen> {
   String altaText = 'Fecha de Alta:';
   String departamentoText = 'Departamento:';
   String planificadaText = 'Fecha Planificada:';
+  String ultimoPrevText = 'Fecha Último Preventivo:'; // NUEVO
 
   @override
   void initState() {
@@ -150,6 +169,7 @@ class _MainScreenState extends State<MainScreen> {
         altaText = 'Fecha de Alta:';
         departamentoText = 'Departamento:';
         planificadaText = 'Fecha Planificada:';
+        ultimoPrevText = 'Fecha Último Preventivo:'; // NUEVO
       });
       return;
     }
@@ -161,6 +181,7 @@ class _MainScreenState extends State<MainScreen> {
       altaText = 'Fecha de Alta: ${_fecha(encontrado.fechaAlta)}';
       departamentoText = 'Departamento: ${_safe(encontrado.departamento)}';
       planificadaText = 'Fecha Planificada: ${_fecha(encontrado.fechaPlanificada)}';
+      ultimoPrevText = 'Fecha Último Preventivo: ${_fecha(encontrado.fechaUltimoPreventivo)}'; // NUEVO
     });
   }
 
@@ -322,6 +343,8 @@ class _MainScreenState extends State<MainScreen> {
                     _dato(departamentoText),
                     _sp(),
                     _dato(planificadaText),
+                    _sp(),
+                    _dato(ultimoPrevText), // NUEVO
 
                     const SizedBox(height: 28),
 
