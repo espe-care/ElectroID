@@ -4,9 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:http/http.dart' as http;
-
-// NFC (sin alias; usamos FlutterNfcKit directamente)
 import 'package:flutter_nfc_kit/flutter_nfc_kit.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 // ===== Modelo JSON =====
 class Activo {
@@ -545,12 +544,12 @@ class _MainScreenState extends State<MainScreen> {
 
                     const SizedBox(height: 12),
 
-                    // ESCANEAR NFC (mismo estilo que el botón de QR)
+                    // ESCANEAR NFC 
                     SizedBox(
                       width: double.infinity,
                       height: 68,
                       child: ElevatedButton.icon(
-                        onPressed: (_organizaciones.isEmpty || _isNfcReading) ? null : _scanNfc,
+                        onPressed: (kIsWeb || _organizaciones.isEmpty || _isNfcReading) ? null : _scanNfc,
                         style: ElevatedButton.styleFrom(
                           backgroundColor: primaryBlue,
                           elevation: 2,
